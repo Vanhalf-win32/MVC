@@ -1,0 +1,15 @@
+{
+    "name": "vanhalf/mvc",
+    "authors": [
+        {
+            "name": "Vanhalf",
+            "email": "vh.win32@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "pst-0": {
+            "App": "src"
+        }
+    }
+}
