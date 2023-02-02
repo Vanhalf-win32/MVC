@@ -6,7 +6,10 @@
             "email": "vh.win32@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "nikic/fast-route": "^1.3",
+        "twig/twig": "^3.0"
+    },
     "autoload": {
         "pst-0": {
             "App": "src"
