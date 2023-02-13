@@ -28,6 +28,7 @@ switch ($routeInfo[0]) {
         // ... 405 Method Not Allowed
         break;
     case FastRoute\Dispatcher::FOUND:
+        require_once __DIR__ . '/../app/bootstrap.php';
         $handler = $routeInfo[1];
         $vars = $routeInfo[2];
         call_user_func($handler);

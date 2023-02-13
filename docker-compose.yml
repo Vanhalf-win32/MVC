@@ -9,3 +9,15 @@ services:
     volumes:
       - ./:/var/www/html/
       - ./config/local.conf:/etc/apache2/sites-available/000-default.conf
+  db:
+    image: mysql:8.0.32-debian
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_USER: mvc
+      MYSQL_PASSWORD: mvc
+      MYSQL_DATABASE: mvc
+    ports:
+      - "3311:3306"
+    volumes:
+      - ./var/db:/var/lib/mysql
+
