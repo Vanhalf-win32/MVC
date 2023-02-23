@@ -1,0 +1,22 @@
+{% extends "base.twig" %}
+
+{% block title %}News{% endblock %}
+
+{% block content %}
+    <h1>Posts</h1> 
+        <div>
+            <button class="btn btn-primary js-say-hello">Hello</button>
+        </div>
+        {% for post in posts %}
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ post.getTitle() }}</h5>
+                <p class="card-text">{{ post.getContent() }}</p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Read more</a>
+                
+            </div>
+        </div>
+    {% endfor %}
+   
+{% endblock %}

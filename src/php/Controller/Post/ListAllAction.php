@@ -12,6 +12,7 @@ class ListAllAction extends Action
         $posts = $postSrv->selectAll();
         $this->render('posts.twig', [
             'posts' => $posts,
+            'active' => '/posts'
         ]);
     }
 }

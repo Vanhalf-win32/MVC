@@ -7,6 +7,9 @@ class HomeAction extends Action
 {
     protected function action(array $params): void
     {
-      $this->render('home.twig');
+
+      $this->render('home.twig', [
+        'active' => '/posts'
+    ]);
     }
 }
