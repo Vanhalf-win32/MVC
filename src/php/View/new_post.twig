@@ -1,0 +1,23 @@
+{% extends "base.twig" %}
+
+{% block title %} New Post {% endblock %}
+
+{% block content %}
+
+    <h1> Add new post </h1>
+        <div class = "form_new_post">
+            <form method ="POST">
+                <div class = "form_new_post-title"> 
+                    Write name title - 
+                    <input type = "text" name = "title"></br>
+                </div>
+                <div class = "form_new_post-content"> 
+                    Write content - 
+                    <textarea name = "content" rows = "5" cols = "50"></textarea></br>
+                </div>
+                <div class = "form_new_post-create">
+                    <button>Create</button>
+                </div>    
+            </form>  
+        </div> 
+{% endblock %}

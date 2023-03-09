@@ -23,14 +23,17 @@ abstract class Action
     }
     
 
-    protected function render($tpl, $data)
+    protected function render(string $tpl, array|null $data = []): void
     {
         $loader = new FilesystemLoader(__DIR__ . '/../View');
         $twig = new Environment($loader, [
-            //'cache' => __DIR__ . '/../../var/twig_cache',
+            //'cache' => __DIR__ . '/../../../var/twig_cache',
         ]);
 
         $template = $twig->load($tpl);
+        if($data === null) {
+            $data = [];
+        }
         echo $template->render($data);
     }
 
