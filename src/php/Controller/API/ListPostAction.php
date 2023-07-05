@@ -1,17 +1,15 @@
 <?php
 
-namespace App\Controller\Post;
+namespace App\Controller\API;
 use App\Controller\Action;
 use App\Model\Posts\Service;
 
-class ListAllAction extends Action
+class ListPostAction extends Action
 {
     public function action(array $params): void
     {
         $postSrv = new Service();
         $posts = $postSrv->selectAll();
-        $this->render('posts.twig', [
-            'posts' => $posts,
-        ]);
+        $this->json($posts); 
     }
 }

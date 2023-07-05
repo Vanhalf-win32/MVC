@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+            <link rel="stylesheet" href="style.css"/>
+            <title>{% block title %}{% endblock %} - My Webpage</title>
+        {% endblock %}
+    </head>
+    <body>
+        <div>
+              <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link {% if active == '/' %}active{%endif%} " aria-current="true" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if active == '/posts' %}active{%endif%}" href="/posts">Posts</a>
+                </li>
+                 <li class="nav-item">
+                    <a class="nav-link {% if active == '/new_post' %}active{%endif%} " aria-current="true" href="/new_post">New post</a>
+                </li>
+                </ul>
+            </div>
+        <div id="content">{% block content %}{% endblock %}</div>
+        <div id="footer">
+            {% block footer %}
+                &copy; Copyright 2011 by <a href="http://domain.invalid/">Curiosity</a>.
+            {% endblock %}
+            
+        </div>
+    <script src="./main.js"></script>
+    </body>
+</html>

@@ -15,16 +15,16 @@ class Repository
 
     public function add(Post $post): void
     {
-        $this->db_>prepare('
-        INSERT INTO post (title, content)
+        $stmt = $this->db->prepare('
+        INSERT INTO posts (title, content)
         VALUES (:title, :content)
         ');
         $title = $post->getTitle();
-        $stmt->bindParam(':title', $title, PDO:PARAM_STR);
-        $content = $post->getCOntent();
-        $stmt->bindParam(':content', $content, PDO:PARAM_STR);
+        $stmt->bindParam(':title', $title, PDO::PARAM_STR);
+        $content = $post->getContent();
+        $stmt->bindParam(':content', $content, PDO::PARAM_STR);
 
-        $isSuccess->execute();
+        $isSuccess = $stmt->execute();
         if(!$isSuccess) {
             $err = $stmt->errorInfo();
             throw new BaseException($err[0] . '' . $err[0] . '' . $err[2]);

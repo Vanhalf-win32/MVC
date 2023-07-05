@@ -8,7 +8,7 @@ use App\Model\Exception\InvalidDataException;
 
 abstract class Action
 {
-
+    
     public function __invoke(array $params): void
     {
         try {
@@ -23,15 +23,27 @@ abstract class Action
     }
     
 
-    protected function render($tpl, $data)
+    protected function render(string $tpl, array|null $data = []): void
     {
         $loader = new FilesystemLoader(__DIR__ . '/../View');
         $twig = new Environment($loader, [
-            //'cache' => __DIR__ . '/../../var/twig_cache',
+            //'cache' => __DIR__ . '/../../../var/twig_cache',
         ]);
 
         $template = $twig->load($tpl);
+        if($data === null) {
+            $data = [];
+        }
         echo $template->render($data);
+    }
+
+    protected function json(array $data = [], $code = 200): void 
+    {
+        header('Contsent-Type: application/json; charset=utf-8');
+        echo json_encode([
+            'status' => $code,
+            'payload' => $data,
+        ]);
     }
 
     abstract protected function action(array $params): void;

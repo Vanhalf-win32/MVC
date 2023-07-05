@@ -8,6 +8,8 @@ $routes = require __DIR__ . '/../app/routes.php';
 
 $dispatcher = FastRoute\simpleDispatcher($routes);
 
+
+
 // Fetch method and URI from somewhere
 $httpMethod = $_SERVER['REQUEST_METHOD'];
 $uri = $_SERVER['REQUEST_URI'];
@@ -21,14 +23,14 @@ $uri = rawurldecode($uri);
 $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
 switch ($routeInfo[0]) {
     case FastRoute\Dispatcher::NOT_FOUND:
-        // ... 404 Not Found
+         header("HTTP/1.1 404 Not Found");
         break;
     case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
         $allowedMethods = $routeInfo[1];
         // ... 405 Method Not Allowed
         break;
     case FastRoute\Dispatcher::FOUND:
-        require_once __DIR__ . '/../app/bootstrap.php';
+        require_once __DIR__ . '/../app/initload.php';
         $class = $routeInfo[1];
         $action = new $class();
         $vars = $routeInfo[2];
