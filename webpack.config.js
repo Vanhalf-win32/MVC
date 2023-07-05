@@ -1,38 +1,38 @@
-const path = require('path')
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  watch: true,
-  entry: './src/frontend/js/main.js',
-  output: {
-    filename: 'main.js',
-    path: path.resolve(__dirname, 'dist')
-  },
+  mode: 'development',
+  entry: './src/frontend/index.tsx',
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
-        test: /\.(scss)$/,
-        use: [
-          {
-            loader: 'style-loader'
-          },
-          {
-            loader: 'css-loader'
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                plugins: () => [
-                  require('autoprefixer')
-                ]
-              }
-            }
-          },
-          {
-            loader: 'sass-loader'
-          }
-        ]
-      }
-    ]
-  }
-}
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+    publicPath:'/',
+  },
+  plugins: [new HtmlWebpackPlugin()],
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'public'),
+    },
+    compress: true,
+    historyApiFallback: true,
+    hot: true,
+    port: 9000,
+    proxy: {
+      '/api' : 'http://php',
+    }
+  },
+};

@@ -6,6 +6,10 @@ services:
       dockerfile: config/Dockerfile
     ports:
       - "80:80"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    env_file:
+      - ./.env
     volumes:
       - ./:/var/www/html/
       - ./config/local.conf:/etc/apache2/sites-available/000-default.conf
@@ -13,6 +17,10 @@ services:
     image: node:18.14.2-alpine3.17
     user: "node"
     working_dir: /home/node/app
+    ports:
+      - "9000:9000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes: 
       - ./:/home/node/app
     command: "yarn watch"
@@ -28,4 +36,3 @@ services:
       - "3311:3306"
     volumes:
       - ./var/db:/var/lib/mysql
-

@@ -14,5 +14,5 @@ class NewPostAction extends Action
         'active' => '/new_post'
     ]);
     }
-
 }
+

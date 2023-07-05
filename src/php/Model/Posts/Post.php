@@ -2,7 +2,10 @@
 
 namespace App\Model\Posts;
 
-class Post 
+use App\Model\Exception\InvalidDataException;   
+
+
+class Post implements \JsonSerializable
 {
     private string $title;
     private string $content;
@@ -38,11 +41,19 @@ class Post
     private function setContent(string $content): void
     {
         if (empty($content)) {
-            throw new InvalidDataException('Empty title');
+            throw new InvalidDataException('Empty content');
         }
         if (mb_strlen($content) > 4000) {
-            throw new InvalidDataException('Title must be less than 255 characters');
+            throw new InvalidDataException('Content must be less than 4000 characters');
         }
         $this->content = $content;
+    }
+
+    public function jsonSerialize(): mixed {
+        
+        return [
+            'title' => $this->getTitle(),
+            'content' => $this->getContent(),
+        ];
     }
 }
