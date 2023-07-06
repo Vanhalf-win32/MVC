@@ -18,6 +18,7 @@ function Post() {
     const [ post, setPost ]= useState<PostData|null>(null);
     const [content, setContent] = useState<string>('');
 
+    const regexp = /^[A-Za-z0-9]*$/;
     
     function editPost () {
      const newcontentPost = {
@@ -50,13 +51,13 @@ function Post() {
     }
 
     return (
-            <div>
+            <div className='App'>
                 <h3>{post.title}</h3>
                 {/* todo: remove */}
                 <h3>{post.content}</h3>
 
                 <textarea  
-                    value={content} 
+                    value={content.match(regexp)} 
                     onChange = { (event) => setContent(event.target.value)} 
                     placeholder = 'edit post'/>
                 <button
